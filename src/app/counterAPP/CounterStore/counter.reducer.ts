@@ -3,6 +3,7 @@ import { initialState } from './counter.state';
 import {
   DecrementAction,
   IncrementAction,
+  InputIncrementAction,
   ResetAction,
 } from './counter.actions';
 
@@ -24,6 +25,12 @@ const _counterReducer = createReducer(
     return {
       ...state,
       counter: 10,
+    };
+  }),
+  on(InputIncrementAction, (state, action) => {
+    return {
+      ...state,
+      counter: state.counter + action.value,
     };
   })
 );
