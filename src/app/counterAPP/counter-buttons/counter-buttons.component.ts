@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  DecrementAction,
-  IncrementAction,
-  ResetAction,
+  CounterDecrementAction,
+  CounterIncrementAction,
+  CounterResetAction,
 } from '../CounterStore/counter.actions';
 import { counterState } from '../CounterStore/counter.state';
 
@@ -16,14 +16,14 @@ export class CounterButtonsComponent {
   constructor(private store: Store<{ counter: counterState }>) {}
 
   onIncrement() {
-    this.store.dispatch(IncrementAction());
+    this.store.dispatch(new CounterIncrementAction());
   }
 
   onDecrement() {
-    this.store.dispatch(DecrementAction());
+    this.store.dispatch(new CounterDecrementAction());
   }
 
   onReset() {
-    this.store.dispatch(ResetAction());
+    this.store.dispatch(new CounterResetAction());
   }
 }

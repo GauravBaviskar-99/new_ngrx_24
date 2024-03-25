@@ -1,40 +1,33 @@
-import { createReducer, on } from '@ngrx/store';
-import { initialState } from './counter.state';
-import {
-  DecrementAction,
-  IncrementAction,
-  InputIncrementAction,
-  ResetAction,
-} from './counter.actions';
+import { ActionTypes } from './counter.actions';
+import { counterState, initialState } from './counter.state';
 
-const _counterReducer = createReducer(
-  initialState,
-  on(IncrementAction, (state) => {
-    return {
-      ...state,
-      counter: state.counter + 1,
-    };
-  }),
-  on(DecrementAction, (state) => {
-    return {
-      ...state,
-      counter: state.counter - 1,
-    };
-  }),
-  on(ResetAction, (state) => {
-    return {
-      ...state,
-      counter: 10,
-    };
-  }),
-  on(InputIncrementAction, (state, action) => {
-    return {
-      ...state,
-      counter: state.counter + action.value,
-    };
-  })
-);
+export function counterReducer(
+  state: counterState = initialState,
+  action: any
+): counterState {
+  switch (action.type) {
+    case ActionTypes.IncrementAction:
+      return {
+        ...state,
+        counter: state.counter + 1,
+      };
+    case ActionTypes.DecrementAction:
+      return {
+        ...state,
+        counter: state.counter - 1,
+      };
+    case ActionTypes.CounterResetAction:
+      return {
+        ...state,
+        counter: 99,
+      };
+    case ActionTypes.CounterInputIncrementAction:
+      return {
+        ...state,
+        counter: state.counter + action.payload.value,
+      };
 
-export function counterReducer(initialState: any, action: any) {
-  return _counterReducer(initialState, action);
+    default:
+      return state;
+  }
 }

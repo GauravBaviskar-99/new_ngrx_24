@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { counterState } from '../CounterStore/counter.state';
 import { Store } from '@ngrx/store';
-import { InputIncrementAction } from '../CounterStore/counter.actions';
+import { CounterInputIncrementAction } from '../CounterStore/counter.actions';
 
 @Component({
   selector: 'app-counter-input-increment',
@@ -14,6 +14,8 @@ export class CounterInputIncrementComponent implements OnInit {
   ngOnInit(): void {}
 
   IncrementBy() {
-    this.store.dispatch(InputIncrementAction({ value: this.incrementBy }));
+    this.store.dispatch(
+      new CounterInputIncrementAction({ value: this.incrementBy })
+    );
   }
 }
