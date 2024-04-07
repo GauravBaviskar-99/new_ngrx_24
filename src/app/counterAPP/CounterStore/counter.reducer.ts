@@ -19,7 +19,7 @@ export function counterReducer(
     case ActionTypes.CounterResetAction:
       return {
         ...state,
-        counter: 99,
+        counter: 0,
       };
     case ActionTypes.CounterInputIncrementAction:
       return {

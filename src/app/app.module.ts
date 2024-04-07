@@ -14,6 +14,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { PostListComponent } from './Post/post-list/post-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from './AppStore/app.state';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ counter: counterReducer }),
+    StoreModule.forRoot(appReducer),
     FormsModule,
 
     // Instrumentation must be imported after importing StoreModule (config is optional)
