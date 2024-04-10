@@ -1,6 +1,6 @@
 .appContainer{
     margin-top: 5%;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
 }

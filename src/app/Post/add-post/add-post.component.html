@@ -1,0 +1,31 @@
+<h3>{{isEditMode ? 'Update Post':'Add Post'}}</h3>
+<hr>
+<form [formGroup]="postForm" (ngSubmit)="onPostSubmit(postForm)">
+    <div class="mb-3">
+        <label for="exampleInputtitle" class="form-label">Title</label>
+        <input formControlName="title" placeholder="Enter Title" type="text" class="form-control "
+            id="exampleInputtitle">
+        <div *ngIf="title?.touched && title?.invalid">
+            <div *ngIf="title?.errors?.['required']">
+                UserName is required
+            </div>
+            <div *ngIf="title?.errors?.['minlength']">
+                Provide minimum length as 6 character
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputDescription" class="form-label">Description</label>
+        <input formControlName="description" placeholder="EnterDescription" type="text" class="form-control"
+            id="exampleInputDescription">
+            <div *ngIf="description?.touched && description?.invalid">
+                <div *ngIf="description?.errors?.['required']">
+                    UserName is required
+                </div>
+                <div *ngIf="description?.errors?.['minlength']">
+                    Provide minimum length as 6 character
+                </div>
+            </div>
+    </div>
+    <button type="submit" [disabled]="postForm.invalid" class="btn btn-primary">{{isEditMode ? 'Update Post':'Add Post'}}</button>
+</form>

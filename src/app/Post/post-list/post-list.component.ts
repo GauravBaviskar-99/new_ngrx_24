@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/AppStore/app.state';
-import { Post, PostState } from './PostStore/post.state';
-import { getPostSelector } from './PostStore/post.selectors';
+import { Post, PostState } from '../PostStore/post.state';
+import { getPostSelector } from '../PostStore/post.selectors';
 
 @Component({
   selector: 'app-post-list',

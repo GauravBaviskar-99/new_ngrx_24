@@ -9,12 +9,13 @@ import { CounterButtonsComponent } from './counterAPP/counter-buttons/counter-bu
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './counterAPP/CounterStore/counter.reducer';
 import { CounterInputIncrementComponent } from './counterAPP/counter-input-increment/counter-input-increment.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { PostListComponent } from './Post/post-list/post-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './AppStore/app.state';
+import { AddPostComponent } from './Post/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +27,14 @@ import { appReducer } from './AppStore/app.state';
     HeaderComponent,
     HomeComponent,
     PostListComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(appReducer),
     FormsModule,
-
+    ReactiveFormsModule,
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
