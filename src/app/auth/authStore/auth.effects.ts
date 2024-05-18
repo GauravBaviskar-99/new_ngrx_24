@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '../Services/auth.service';
 import { LOGIN_ACTION_START, loginAction, loginSucess } from './auth.actions';
-import { catchError, exhaustMap, map, mergeMap, of } from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 import { authResponse } from 'src/app/models/authResponse.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/AppStore/app.state';
@@ -10,6 +10,7 @@ import {
   activateSpinnerAction,
   showErrorMessageAction,
 } from 'src/app/AppStore/Shared/shared.actions';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {}
 
   login$ = createEffect(() => {
@@ -46,4 +48,16 @@ export class AuthEffects {
       })
     );
   });
+
+  $loginSuccess = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loginSucess),
+        tap((action) => {
+          this.router.navigate(['/']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 }
