@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '../Services/auth.service';
-import { LOGIN_ACTION_START, loginAction, loginSucess } from './auth.actions';
+import {
+  LOGIN_ACTION_START,
+  loginAction,
+  loginSucess,
+  signupAction,
+} from './auth.actions';
 import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 import { authResponse } from 'src/app/models/authResponse.model';
 import { Store } from '@ngrx/store';
@@ -33,6 +38,7 @@ export class AuthEffects {
             this.store.dispatch(showErrorMessageAction({ errorMessage: '' }));
             console.log(data);
             const user = this.authService.formatUser(data);
+            this.authService.setUserToLocalStorage(user);
             return loginSucess({ user });
           }),
           catchError((error) => {
@@ -60,4 +66,32 @@ export class AuthEffects {
     },
     { dispatch: false }
   );
+
+  $signupEffect = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(signupAction),
+      exhaustMap((action) => {
+        return this.authService.signUp(action.id, action.password).pipe(
+          map((response) => {
+            this.store.dispatch(activateSpinnerAction({ showSpinner: false }));
+            this.store.dispatch(showErrorMessageAction({ errorMessage: '' }));
+            this.authService.setUserToLocalStorage(
+              this.authService.formatUser(response)
+            );
+
+            return loginSucess({ user: this.authService.formatUser(response) });
+          }),
+          catchError((error) => {
+            this.store.dispatch(activateSpinnerAction({ showSpinner: false }));
+            console.log(error);
+            return of(
+              showErrorMessageAction({
+                errorMessage: error.error.error.message,
+              })
+            );
+          })
+        );
+      })
+    );
+  });
 }

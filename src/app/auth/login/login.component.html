@@ -1,5 +1,5 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmitLoginForm(loginForm)">
-  <h3>Login form</h3>
+  <h3>{{isSignupForm ? 'Signup Form': 'Login Form '}}</h3>
   <hr>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>

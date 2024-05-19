@@ -3,6 +3,10 @@ export class User {
     private email: string,
     private idToken: string,
     private localID: string,
-    private expirationDate: string
+    public expirationDate: string
   ) {}
+
+  get expirationTime() {
+    return this.expirationDate;
+  }
 }
