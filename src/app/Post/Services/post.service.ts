@@ -36,4 +36,23 @@ export class PostService {
         })
       );
   }
+
+  updatePost(post: Post): Observable<Post> {
+    return this.http
+      .put<Post>(
+        `https://oshop-aac6a-default-rtdb.firebaseio.com/Posts/${post.id}.json`,
+        post
+      )
+      .pipe(
+        map((data) => {
+          return data;
+        })
+      );
+  }
+
+  deletePost(id: string | number) {
+    return this.http.delete(
+      `https://oshop-aac6a-default-rtdb.firebaseio.com/Posts/${id}.json`
+    );
+  }
 }
