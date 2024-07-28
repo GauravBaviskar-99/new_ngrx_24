@@ -14,6 +14,7 @@ import { Post } from './post.state';
 
 export const Load_Posts = '[Posts Page] load posts';
 export const Load_Posts_Success = '[Post Page] load posts success';
+export const ADD_POST_ACTION_SUCCESS = '[Post Page] add post action success';
 
 export const postAction = createAction(
   'PostAction',
@@ -40,4 +41,9 @@ export const loadPost = createAction(Load_Posts);
 export const loadPostsSuccess = createAction(
   Load_Posts_Success,
   props<{ posts: Post[] }>()
+);
+
+export const addPostSuccess = createAction(
+  ADD_POST_ACTION_SUCCESS,
+  props<{ post: Post }>()
 );
