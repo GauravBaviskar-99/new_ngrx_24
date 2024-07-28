@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AppState } from 'src/app/AppStore/app.state';
 import { Post, PostState } from '../PostStore/post.state';
 import { getPostSelector } from '../PostStore/post.selectors';
+import { loadPost } from '../PostStore/post.actions';
 
 @Component({
   selector: 'app-post-list',
@@ -16,5 +17,6 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.allPosts$ = this.store.select(getPostSelector);
+    this.store.dispatch(loadPost());
   }
 }
