@@ -10,9 +10,11 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { appReducer } from './AppStore/app.state';
+import { AuthTokenInterceptor } from './auth/Services/auth-token.interceptor';
+import { BillingComponent } from './billing/billing.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { appReducer } from './AppStore/app.state';
     HeaderComponent,
     HomeComponent,
     LoadingSpinnerComponent,
+    BillingComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,13 @@ import { appReducer } from './AppStore/app.state';
       // connectInZone: true // If set to true, the connection is established within the Angular zone
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

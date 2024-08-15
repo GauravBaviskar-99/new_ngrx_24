@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counterAPP/counter/counter.component';
 import { PostListComponent } from './Post/post-list/post-list.component';
 import { AddPostComponent } from './Post/add-post/add-post.component';
+import { BillingComponent } from './billing/billing.component';
+import { authguardGuard } from './auth/Guards/authguard.guard';
 
 const routes: Routes = [
   {
@@ -22,6 +24,11 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'billing',
+    component: BillingComponent,
+    canActivate: [authguardGuard],
   },
 ];
 
