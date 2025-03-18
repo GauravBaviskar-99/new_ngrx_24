@@ -2,7 +2,7 @@
 
 
   <div class="container px-4 text-center">
-    <a  class="btn btn-primary" [routerLink]="['/post/add']">Add Post</a>
+    <a  class="btn btn-primary" [routerLink]="['/post/postOperation']">Add Post</a>
     <div class="row gx-5">
 
       <div class="col">
@@ -22,8 +22,10 @@
                     <td>{{post.id}}</td>
                     <td>{{post.title}}</td>
                     <td>{{post.description}}</td>
-                    <td><button [routerLink]="['update',post.id]" class="btn btn-secondary">Update </button></td>
-                    <td><button [routerLink]="['delete',post.id]" class="btn btn-danger">Delete </button></td>
+                    <td><button [routerLink]="['postOperation']" [queryParams]="{ operation:'update' ,id:post.id}"
+                        class="btn btn-secondary">Update </button></td>
+                    <td><button [routerLink]="['postOperation']" [queryParams]="{ operation:'delete' ,id:post.id}"
+                        class="btn btn-danger">Delete </button></td>
 
                   </tr>
             </tbody>

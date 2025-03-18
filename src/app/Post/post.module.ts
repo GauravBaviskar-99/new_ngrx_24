@@ -15,15 +15,7 @@ const routes: Routes = [
     component: PostListComponent,
     children: [
       {
-        path: 'add',
-        component: AddPostComponent,
-      },
-      {
-        path: 'update/:id',
-        component: AddPostComponent,
-      },
-      {
-        path: 'delete/:del-id',
+        path: 'postOperation',
         component: AddPostComponent,
       },
     ],

@@ -15,6 +15,8 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
 import { appReducer } from './AppStore/app.state';
 import { AuthTokenInterceptor } from './auth/Services/auth-token.interceptor';
 import { BillingComponent } from './billing/billing.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './AppStore/custom-route-serializer';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,10 @@ import { BillingComponent } from './billing/billing.component';
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       // connectInZone: true // If set to true, the connection is established within the Angular zone
+    }),
+
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer,
     }),
   ],
   providers: [
